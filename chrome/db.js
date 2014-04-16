@@ -128,29 +128,6 @@ function addTodo() {
     var itemName = $("#todo");
     shopWatch.storage.addTodo(itemName.val(),shopWatch.tabUrl);
     itemName.val('');
-    
-    /*
-    chrome.tabs.executeScript({
-    	file: 'scrap_images.js'
-    	//code: 'alert("hi");'
-  	});
-*/
-    //requestPageData(tabID);
-    
-    
-  /*  
-chrome.runtime.onConnect.addListener(function(port) {
-  console.assert(port.name == "knockknock");
-  port.onMessage.addListener(function(msg) {
-    if (msg.joke == "Knock knock"){
-      port.postMessage({question: "Who's there?"});
-    }else if (msg.answer == "Madame"){
-    	images = msg.images;
-      //port.postMessage({question: "Madame who?"});
-      
-    }
-  });
-}); */
 
 }
 
@@ -169,62 +146,24 @@ function init() {
 
   
   $("#addButton").click(addTodo);
-  /*var bp = chrome.extension.getBackgroundPage();
-  var images = returnImages();
-  images.forEach(function(v){
 
-		  $('#image_holder').append("<img src='"+v+"' width='50' height='50'>");
-	});
-  */
-}
-
-function get_page_images(){
-chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-  chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
-    console.log(response.farewell);
-  });
-});
 }
 
 
 window.addEventListener("DOMContentLoaded", init, false);
 
 
-
-function requestPageData(tabID){
-
-	var port = chrome.tabs.connect(tabID, {name: "imagePort"});
-	port.postMessage({request: "getImages"});
-	port.onMessage.addListener(function(msg) {
-
-		msg.images.forEach(function(v){
-
-		  $('#image_holder').append("<img src='"+v+"' width='50' height='50'>");
-		});
-
-
-	});
-
-}
-
-chrome.runtime.onMessage.addListener(function(msg) {
-
-		msg.images.forEach(function(v){
-
-		  $('#image_holder').append("<img src='"+v+"' width='50' height='50'>");
-		});
-
-	});
-
-
 var port = chrome.extension.connect({name: "Sample Communication"});
 port.postMessage("Hi BackGround");
 port.onMessage.addListener(function(msg) {
         console.log("message recieved"+ msg);
-        images = msg.images;
-        msg.images.forEach(function(v){
+        
+        if (msg.method=="downloadImages"){
+			images = msg.images;
+			msg.images.forEach(function(v){
 
-		  $('#image_holder').append("<img src='"+v+"' width='50' height='50'>");
-		});
+			  $('#image_holder').append("<img src='"+v+"' width='50' height='50'>");
+			});
+		}
 });
 
