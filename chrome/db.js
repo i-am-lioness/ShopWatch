@@ -142,6 +142,8 @@ function init() {
     
     $("#todo").val(tab.title);
     tabID= tab.id;
+    
+    connectToPage(tab.id);
 });
 
   
@@ -152,7 +154,7 @@ function init() {
 
 window.addEventListener("DOMContentLoaded", init, false);
 
-
+/*
 var port = chrome.extension.connect({name: "Sample Communication"});
 port.postMessage("Hi BackGround");
 port.onMessage.addListener(function(msg) {
@@ -166,4 +168,23 @@ port.onMessage.addListener(function(msg) {
 			});
 		}
 });
+
+*/
+
+function connectToPage(tabId){
+	var port = chrome.tabs.connect(tabId, {name: "imageChannel" });
+	port.postMessage("content_request_init");
+	port.onMessage.addListener(function(msg) {
+		
+			if (msg.info=="image_results"){
+				images = msg.images;
+				msg.images.forEach(function(v){
+
+				  $('#image_holder').append("<img src='"+v+"' width='50' height='50'>");
+				});
+			}
+	});
+
+}
+
 

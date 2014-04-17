@@ -59,6 +59,7 @@ chrome.runtime.onConnect.addListener(function(port) {
 
 */
 
+/*
 var port = chrome.runtime.connect({name: "knockknock"});
 port.postMessage({joke: "Knock knock"});
 port.onMessage.addListener(function(msg) {
@@ -80,7 +81,7 @@ port.onMessage.addListener(function(msg) {
     
     }
 });
-
+*/
 
 function getPinButton(){
 
@@ -104,3 +105,35 @@ function getJsonFromUrl(url) {
   }
   return result;
 }
+
+
+
+chrome.runtime.onConnect.addListener(function(port) {
+  if(port.name == "imageChannel")
+	  port.onMessage.addListener(function(msg) {
+		if (msg == "content_request_init"){
+		
+		
+			var images = [];
+		
+			for(var i = 0; i < document.images.length; i++){
+				img=document.images[i];
+				if ((img.clientWidth > 200)&&(img.clientHeight > 200))
+					images.push(document.images[i].src);
+			}
+		
+			if (images.length < 1)
+				images.push(getPinButton());
+  
+			port.postMessage({info: "image_results", images: images});
+		
+		
+		}else if (msg.answer == "Madame"){
+			images = msg.images;
+			
+		}
+	  });
+});
+
+
+
