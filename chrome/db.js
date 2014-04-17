@@ -154,22 +154,6 @@ function init() {
 
 window.addEventListener("DOMContentLoaded", init, false);
 
-/*
-var port = chrome.extension.connect({name: "Sample Communication"});
-port.postMessage("Hi BackGround");
-port.onMessage.addListener(function(msg) {
-        console.log("message recieved"+ msg);
-        
-        if (msg.method=="downloadImages"){
-			images = msg.images;
-			msg.images.forEach(function(v){
-
-			  $('#image_holder').append("<img src='"+v+"' width='50' height='50'>");
-			});
-		}
-});
-
-*/
 
 function connectToPage(tabId){
 	var port = chrome.tabs.connect(tabId, {name: "imageChannel" });

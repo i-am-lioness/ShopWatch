@@ -19,10 +19,5 @@
       "matches": ["http://*/*","https://*/*"],
       "js": ["jquery-1.11.0.min.js", "scrap_images.js"]
     }
-  ],
-  
-	"background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  	}
+  ]
 }
