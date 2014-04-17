@@ -32,7 +32,7 @@ shopWatch.storage.open = function() {
   request.onerror = shopWatch.storage.onerror;
 };
 
-shopWatch.storage.addTodo = function(todoText, link) {
+shopWatch.storage.addTodo = function(todoText, link,img_src) {
   var db = shopWatch.storage.db;
   var trans = db.transaction(["todo"], "readwrite");
   var store = trans.objectStore("todo");
@@ -40,7 +40,7 @@ shopWatch.storage.addTodo = function(todoText, link) {
     "text": todoText,
     "timeStamp" : new Date().getTime(),
     "link": link,
-    "image": images[0]
+    "image": img_src
   });
 
   request.onsuccess = function(e) {

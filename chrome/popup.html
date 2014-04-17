@@ -4,7 +4,7 @@
     <title>Getting Started Extension's Popup</title>
     <style>
       body {
-        min-width: 357px;
+        min-width: 400px;
         overflow-x: hidden;
       }
 
@@ -15,14 +15,44 @@
         width: 75px;
         height: 75px;
       }
+      
+      ul{
+      padding: 5px;
+      }
+      
+      li{
+      	position: relative;
+      	background-color: rgb(245, 203, 125);
+      	padding: 5px;
+      	color: White;
+      	display: block;
+      	margin: 5px;
+      
+      }
+      
+      li a {
+      	display: inline-block;
+      	width: 200px;
+      	color: white;
+text-decoration: none;
+font-weight: bold;
+font-family: sans-serif;
+      
+      }
+    
+      
+      li button {
+      	position: absolute;
+      	right: 5px;
+      	top: 5px;
+      }
+      
+      li img{
+      	/*float: left;*/
+      }
     </style>
 
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-     -->
+
      <script src="jquery-1.11.0.min.js"></script>
     <script src="db.js"></script>
     <script src="popup.js"></script>

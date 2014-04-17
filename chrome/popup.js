@@ -19,23 +19,21 @@ function renderTodo(row) {
 	
 	
 	var item = $("<li> </li>");
+  	item.append("<img src='"+row.image+"'>");
 	item.append(itemLink);
 	item.append(deleteButton);
-  
-  	if(row.image){ 
-  		var imageNode = $("<img src='"+row.image+"'>");
-  		item.append(imageNode);
-	}
+
+	
   
   $("#todoItems").append(item);
 }
 
 
 
-function addTodo() {
+function addTodo(img_src) {
 
     var itemName = $("#todo");
-    shopWatch.storage.addTodo(itemName.val(),shopWatch.tabUrl);
+    shopWatch.storage.addTodo(itemName.val(),shopWatch.tabUrl, img_src);
     itemName.val('');
 
 }
@@ -72,8 +70,13 @@ function connectToPage(tabId){
 			if (msg.info=="image_results"){
 				images = msg.images;
 				msg.images.forEach(function(v){
-
-				  $('#image_holder').append("<img src='"+v+"' width='50' height='50'>");
+				
+					var thumbnail = $("<img src='"+v+"' width='50' height='50'>");
+					thumbnail.click(function (){
+						addTodo(v);
+						});
+					thumbnail.appendTo("#image_holder");
+				  //$('#image_holder').append
 				});
 			}
 	});
