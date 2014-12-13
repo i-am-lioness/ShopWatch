@@ -3,9 +3,17 @@
 function getPinButton(){
 
 	//var pinButton = $("a[href*=pinterest.com/pin/create/button").first();
-	var pinButton = $("a[href*=pinterest]").first();
+/*	var pinButton = $("a[href*=pinterest]").first();
 	
 	var url = pinButton.attr("href");
+	
+	if(!url){
+	*/
+	
+		var pinButton = $("a[data-pin-href*=pinterest]").first();	
+		var url = pinButton.attr("data-pin-href");
+	
+	//}
 	
 	var params = getJsonFromUrl(url);
 	

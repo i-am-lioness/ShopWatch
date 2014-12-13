@@ -1,6 +1,7 @@
 
 var tabID;
 var images;
+var selectedThumbnail;
 
 
 function renderTodo(row) {
@@ -30,8 +31,10 @@ function renderTodo(row) {
 
 
 
-function addTodo(img_src) {
+//function addTodo(img_src) {
+function addTodo() {
 
+	var img_src = selectedThumbnail;
     var itemName = $("#todo");
     shopWatch.storage.addTodo(itemName.val(),shopWatch.tabUrl, img_src);
     itemName.val('');
@@ -72,8 +75,20 @@ function connectToPage(tabId){
 				msg.images.forEach(function(v){
 				
 					var thumbnail = $("<img src='"+v+"' width='50' height='50'>");
+					thumbnail.hover(
+						function(){
+							$( this ).addClass("highlight");
+						},
+						
+						function(){
+							$( this ).removeClass("highlight");
+						}
+					);
 					thumbnail.click(function (){
-						addTodo(v);
+						$(".selected").removeClass("selected");
+						selectedThumbnail=$( this ).attr("src");
+						$( this ).addClass("selected");
+						//addTodo(v);
 						});
 					thumbnail.appendTo("#image_holder");
 				  //$('#image_holder').append
