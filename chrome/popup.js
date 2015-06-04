@@ -20,7 +20,8 @@ function renderTodo(row) {
 	
 	
 	var item = $("<li> </li>");
-  	item.append("<img src='"+row.image+"'>");
+	item.css("background-image","url("+row.image+")");
+  	//item.append("<img src='"+row.image+"'>");
 	item.append(itemLink);
 	item.append(deleteButton);
 
@@ -29,13 +30,10 @@ function renderTodo(row) {
   $("#todoItems").append(item);
 }
 
-
-
-//function addTodo(img_src) {
 function addTodo() {
 
 	var img_src = selectedThumbnail;
-    var itemName = $("#todo");
+    var itemName = $("#item-name");
     shopWatch.storage.addTodo(itemName.val(),shopWatch.tabUrl, img_src);
     itemName.val('');
 
@@ -50,7 +48,7 @@ function init() {
   chrome.tabs.getSelected(null,function(tab) {
     shopWatch.tabUrl = tab.url;
     
-    $("#todo").val(tab.title);
+    $("#item-name").val(tab.title);
     tabID= tab.id;
     
     connectToPage(tab.id);
@@ -90,8 +88,7 @@ function connectToPage(tabId){
 						$( this ).addClass("selected");
 						//addTodo(v);
 						});
-					thumbnail.appendTo("#image_holder");
-				  //$('#image_holder').append
+					thumbnail.appendTo("#found-images");
 				});
 			}
 	});
