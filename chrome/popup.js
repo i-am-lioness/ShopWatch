@@ -27,7 +27,7 @@ function renderTodo(row) {
 
 	
   
-  $("#todoItems").append(item);
+  $("#todoItems").prepend(item);
 }
 
 function addTodo() {
@@ -88,7 +88,7 @@ function connectToPage(tabId){
 						$( this ).addClass("selected");
 						//addTodo(v);
 						});
-					thumbnail.appendTo("#found-images");
+					thumbnail.prependTo("#found-images");
 				});
 			}
 	});

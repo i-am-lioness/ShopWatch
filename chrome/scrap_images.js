@@ -43,7 +43,7 @@ chrome.runtime.onConnect.addListener(function(port) {
 		
 			for(var i = 0; i < document.images.length; i++){
 				img=document.images[i];
-				if ((img.clientWidth > 200)&&(img.clientHeight > 200))
+				if ((img.clientWidth > 300)&&(img.clientHeight > 300))
 					images.push(document.images[i].src);
 			}
 		
