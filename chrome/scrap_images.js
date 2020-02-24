@@ -1,19 +1,20 @@
 
 
+function getPinButtonV2(){
+
+
+	var pinButton = $('.addthis_button_pinterest_pinit').first();
+	var url = pinButton.attr("pi:pinit:media")
+	
+	return `http:${url}`;
+}
+
 function getPinButton(){
 
-	//var pinButton = $("a[href*=pinterest.com/pin/create/button").first();
-/*	var pinButton = $("a[href*=pinterest]").first();
-	
-	var url = pinButton.attr("href");
-	
-	if(!url){
-	*/
-	
 		var pinButton = $("a[data-pin-href*=pinterest]").first();	
 		var url = pinButton.attr("data-pin-href");
-	
-	//}
+
+		if( !url) return null;
 	
 	var params = getJsonFromUrl(url);
 	
@@ -43,14 +44,16 @@ chrome.runtime.onConnect.addListener(function(port) {
 		
 			for(var i = 0; i < document.images.length; i++){
 				img=document.images[i];
-				if ((img.clientWidth > 300)&&(img.clientHeight > 300)) {
+				if ((img.clientWidth > 250)&&(img.clientHeight > 250)) {
 					var src = (img.src || ("http:" + img.srcset.split(" ")[0]));
 					images.push(src);
 				}
 			}
 		
-			if (images.length < 1)
-				images.push(getPinButton());
+			if (images.length < 1) {
+				let pinImage = getPinButton() || getPinButtonV2();
+				images.push(pinImage);
+			}
   
 			port.postMessage({info: "image_results", images: images});
 		
