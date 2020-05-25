@@ -44,7 +44,9 @@ chrome.runtime.onConnect.addListener(function(port) {
 		
 			for(var i = 0; i < document.images.length; i++){
 				img=document.images[i];
+				// const imageArea = img.clientWidth * img.clientHeight;
 				if ((img.clientWidth > 250)&&(img.clientHeight > 250)) {
+				// if (imageArea > (300* 300)) {
 					var src = (img.src || ("http:" + img.srcset.split(" ")[0]));
 					images.push(src);
 				}
